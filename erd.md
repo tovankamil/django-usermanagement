@@ -1,0 +1,106 @@
+### ERD Overview
+
+User
+ │
+ ├── UserProfile
+ │
+ ├── UserRole ── Role ── RolePermission ── Permission
+ │
+ ├── UserSession
+ │
+ └── UserActivityLog
+
+
+### ERD Diagram
+ ┌──────────────┐
+│    users     │
+├──────────────┤
+│ id (PK)      │
+│ username     │
+│ email        │
+│ password     │
+│ is_active    │
+│ is_verified  │
+│ created_at   │
+│ updated_at   │
+└──────┬───────┘
+       │
+       │ 1 - 1
+       │
+┌──────▼─────────┐
+│ user_profiles  │
+├────────────────┤
+│ id (PK)        │
+│ user_id (FK)   │
+│ full_name      │
+│ phone          │
+│ avatar         │
+│ birth_date     │
+│ created_at     │
+└────────────────┘
+
+
+┌───────────────┐
+│     roles     │
+├───────────────┤
+│ id (PK)       │
+│ name          │
+│ description   │
+│ created_at    │
+└───────┬───────┘
+        │
+        │
+┌───────▼─────────┐
+│ user_roles      │
+├─────────────────┤
+│ id (PK)         │
+│ user_id (FK)    │
+│ role_id (FK)    │
+│ assigned_at     │
+└─────────────────┘
+
+
+┌───────────────┐
+│  permissions  │
+├───────────────┤
+│ id (PK)       │
+│ name          │
+│ code          │
+│ description   │
+└───────┬───────┘
+        │
+        │
+┌───────▼────────────┐
+│ role_permissions   │
+├────────────────────┤
+│ id (PK)            │
+│ role_id (FK)       │
+│ permission_id (FK) │
+└────────────────────┘
+
+
+┌──────────────────┐
+│   user_sessions  │
+├──────────────────┤
+│ id (PK)          │
+│ user_id (FK)     │
+│ token            │
+│ device           │
+│ ip_address       │
+│ is_active        │
+│ expires_at       │
+│ created_at       │
+└──────────────────┘
+
+
+┌────────────────────┐
+│  user_activity_log │
+├────────────────────┤
+│ id (PK)            │
+│ user_id (FK)       │
+│ action             │
+│ description        │
+│ ip_address         │
+│ user_agent         │
+│ created_at         │
+└────────────────────┘
