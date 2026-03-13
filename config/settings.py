@@ -135,3 +135,48 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
 
 CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs" / "debug.log",  # ← File log
+            "formatter": "verbose",
+        },
+        "error_file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "logs" / "error.log",  # ← File error
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "apps.users": {  # ← Logger untuk module users
+            "handlers": ["console", "file", "error_file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "apps.users.services": {  # ← Logger spesifik services
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}

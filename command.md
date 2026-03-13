@@ -16,12 +16,16 @@ pip freeze > requirements.txt
 django-admin startproject config .
 pip install django-environ
 pip install coverage
-
+pip install pytest-django
 mkdir apps
 mkdir apps/users
 mkdir apps/users/migrations
 
 mkdir -p apps/users/{domain,application,infrastructure,interfaces,migrations} && touch apps/__init__.py apps/users/__init__.py apps/users/{domain,application,infrastructure,interfaces,migrations}/__init__.py apps/users/domain/{entities,repositories}.py apps/users/application/{services,dto}.py apps/users/infrastructure/{models,repositories,cache}.py apps/users/interfaces/{serializers,views,urls}.py apps/users/{migrations/.gitkeep,apps.py}
 
+### Run only one file
+python manage.py test apps.users.tests.unit.test_user_entity
+
+### coverage test
 coverage run manage.py test
 coverage report
