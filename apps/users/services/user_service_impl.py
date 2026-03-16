@@ -1,5 +1,3 @@
-# apps/users/services/user_service_impl.py
-
 import logging
 from uuid import UUID
 from typing import List, Optional
@@ -105,16 +103,6 @@ class UserServiceImpl(UserService):
         except DatabaseException as e:
             logger.error(f"Database error when getting user by email: {str(e)}")
             raise UserServiceException("Failed to retrieve user data") from e
-
-    def get_user_by_email_or_none(self, email: str) -> Optional[User]:
-        """
-        Retrieves a user by email. Returns None if not found (safe method).
-        """
-        try:
-            return self.user_repository.get_by_email(email)
-        except DatabaseException as e:
-            logger.error(f"Database error when getting user by email or none: {str(e)}")
-            return None
 
     def list_users(self) -> List[User]:
         """

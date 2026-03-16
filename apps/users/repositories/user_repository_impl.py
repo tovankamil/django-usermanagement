@@ -78,6 +78,7 @@ class UserRepositoryImpl(UserRepository):
             model = UserModel.objects.create(
                 id=user.id,
                 username=user.username,
+                avatar=user.avatar,
                 email=user.email,
                 password_hash=user.password_hash,
                 is_active=user.is_active,

@@ -1,5 +1,3 @@
-# users/domain/entities/user.py
-
 from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
@@ -13,6 +11,7 @@ class User:
     password_hash: str
     is_active: bool
     is_verified: bool
+    avatar: str
     last_login: datetime | None
     created_at: datetime
     updated_at: datetime

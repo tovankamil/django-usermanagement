@@ -1,5 +1,3 @@
-# apps/users/domain/repositories/user_repository.py
-
 from abc import ABC, abstractmethod
 from typing import Optional, List
 from uuid import UUID
